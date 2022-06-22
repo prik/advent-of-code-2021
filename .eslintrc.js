@@ -11,6 +11,13 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
+  },
   plugins: [
     '@typescript-eslint',
   ],
@@ -50,5 +57,10 @@ module.exports = {
     'no-console': 'off',
     'no-param-reassign': 'off',
     'no-plusplus': 'off',
+    'lines-between-class-members': [
+      'error',
+      'always',
+      { exceptAfterSingleLine: true },
+    ],
   },
 };

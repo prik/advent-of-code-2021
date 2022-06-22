@@ -11,7 +11,7 @@ const createBitPositionColunms = (source: string[]): string[][] => {
   return bitPositionColumns;
 };
 
-const getMostCommonValueAtBitPosition = ((column: string[]) => {
+const getMostCommonValueAtBitPosition = ((column: string[]): string => {
   const zeroCount = column.filter((x: string) => x === '0').length;
   const oneCount = column.filter((x: string) => x === '1').length;
 
@@ -31,7 +31,7 @@ const getGammaAndEpsilonRates = (columns: string[][]): string[] => {
   return [gammaRate, epsilonRate];
 };
 
-const bitPositionColumns = createBitPositionColunms(diagnosticReport);
+const bitPositionColumns: string[][] = createBitPositionColunms(diagnosticReport);
 const [gammaRateString, epsilonRateString] = getGammaAndEpsilonRates(bitPositionColumns);
 const powerConsumption: number = parseInt(gammaRateString, 2) * parseInt(epsilonRateString, 2);
 
