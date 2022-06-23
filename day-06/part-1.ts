@@ -11,20 +11,20 @@ const lanternFish: number[] = readFileSync(path.resolve(__dirname, 'input.txt'),
   .split(',')
   .map(Number);
 
-const processDay = (fishAge: number, index: number) => {
-  if (fishAge === DEAD) {
-    fishAge = REVIVED_LIFESPAN;
+const processDay = (fishLifespan: number, index: number) => {
+  if (fishLifespan === DEAD) {
+    fishLifespan = REVIVED_LIFESPAN;
     lanternFish.push(NEW_LIFESPAN);
-  } else if (fishAge > 0) {
-    fishAge--;
+  } else if (fishLifespan > 0) {
+    fishLifespan--;
   }
 
-  lanternFish.splice(index, UPDATE, fishAge);
+  lanternFish.splice(index, UPDATE, fishLifespan);
 };
 
 const simulateFishGrowth = (): void => {
   for (let day = 1; day <= SIMULATION_DAYS; day++) {
-    lanternFish.forEach((fishAge, index) => processDay(fishAge, index));
+    lanternFish.forEach((fishLifespan, index) => processDay(fishLifespan, index));
   }
 };
 
