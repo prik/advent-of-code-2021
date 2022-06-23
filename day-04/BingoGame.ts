@@ -1,64 +1,65 @@
 import { BingoCard } from './BingoCard';
 
-// Bingo subsystem output data constants
 const STARTING_ROW_OF_CARDS: number = 2;
-const ROWS_BETWEEN_CARDS: number = 6;
+const ROWS_BETWEEN_CARDS: number = 1;
 const ROWS_IN_CARD: number = 5;
+
+interface WinnerInfo {
+  winnerCard: BingoCard,
+  winningNumber: number,
+}
 
 export class BingoGame {
   subsystemOutput: string[];
   cards: BingoCard[] = [];
-  numberPool: number[] = [];
-  winningNumber?: number;
-  winnerCard?: BingoCard;
+  numberSequence: number[] = [];
+  winners: WinnerInfo[] = [];
 
   constructor(bingoSubsystemOutput: string[]) {
     this.subsystemOutput = bingoSubsystemOutput;
     this.createBingoCards();
     this.setDrawingNumbers();
+    this.play();
+  }
+
+  public getWinner(): WinnerInfo | undefined {
+    return this.winners[0];
+  }
+
+  public getLastWinner(): WinnerInfo | undefined {
+    return this.winners[this.winners.length - 1];
   }
 
   private createBingoCards() {
-    for (let i = STARTING_ROW_OF_CARDS; i < this.subsystemOutput.length; i += ROWS_BETWEEN_CARDS) {
-      const cardId = this.cards.length + 1;
+    for (let i = STARTING_ROW_OF_CARDS; i < this.subsystemOutput.length; i += (ROWS_IN_CARD + ROWS_BETWEEN_CARDS)) {
       const cardData = this.subsystemOutput.slice(i, i + ROWS_IN_CARD);
-      this.cards.push(new BingoCard(cardId, cardData));
+      this.cards.push(new BingoCard(cardData));
     }
   }
 
   private setDrawingNumbers() {
-    this.numberPool = this.subsystemOutput[0]
+    this.numberSequence = this.subsystemOutput[0]
       .split(',')
       .map(Number);
   }
 
-  private markCards(numberDrawn: number) {
-    return this.cards.find((card) => {
+  private drawNumber(numberDrawn: number) {
+    this.cards.forEach((card) => {
+      const cardHasAlreadyWon = this.winners.find((winner) => winner.winnerCard === card);
+      if (cardHasAlreadyWon) return;
+
       card.markNumber(numberDrawn);
 
-      return this.checkBingo(card);
+      if (card.hasBingo()) {
+        this.winners.push({
+          winnerCard: card,
+          winningNumber: numberDrawn,
+        });
+      }
     });
   }
 
-  private checkBingo(card: BingoCard) {
-    const isBingo = card.hasBingo();
-    if (isBingo) this.winnerCard = card;
-
-    return isBingo;
-  }
-
-  playToWin() {
-    this.winningNumber = this.numberPool.find((numberDrawn) => this.markCards(numberDrawn));
-  }
-
-  playToLose() {
-    while (this.cards.length > 0) {
-      this.playToWin();
-      this.removeWinnerCard();
-    }
-  }
-
-  private removeWinnerCard() {
-    this.cards.splice(this.cards.findIndex((card) => card.id === this.winnerCard!.id), 1);
+  private play() {
+    this.numberSequence.forEach((numberDrawn) => this.drawNumber(numberDrawn));
   }
 }

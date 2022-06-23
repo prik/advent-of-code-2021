@@ -5,8 +5,12 @@ import { BingoGame } from './BingoGame';
 const bingoSubsystemOutput = readFileSync(path.resolve(__dirname, 'input.txt'), 'utf-8').split('\n');
 const bingo = new BingoGame(bingoSubsystemOutput);
 
-bingo.playToWin();
+const winnerInfo = bingo.getWinner();
 
-console.log(`BINGO! On card #${bingo.winnerCard!.id} with an unmarked numbers sum of ${bingo.winnerCard!.getSumOfUnmarkedNumbers()} by number ${bingo.winningNumber!}.`);
-console.log('');
-console.log(`Final score: ${bingo.winnerCard!.getSumOfUnmarkedNumbers() * bingo.winningNumber!}`);
+if (winnerInfo) {
+  console.log(`BINGO! With an unmarked numbers sum of ${winnerInfo.winnerCard.getSumOfUnmarkedNumbers()} by number draw ${winnerInfo.winningNumber!}.`);
+  console.log('');
+  console.log(`Final score: ${winnerInfo.winnerCard.getSumOfUnmarkedNumbers() * winnerInfo.winningNumber}`);
+} else {
+  console.log('There is no winner!');
+}

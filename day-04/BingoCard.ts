@@ -1,17 +1,13 @@
-interface IBingoNumber {
+interface BingoNumber {
   value: number,
   marked: boolean,
 }
 
 export class BingoCard {
-  id: number;
-  rows: IBingoNumber[][] = [];
-  columns: IBingoNumber[][] = [];
+  rows: BingoNumber[][] = [];
 
-  constructor(id: number, rawCardRows: string[]) {
-    this.id = id;
+  constructor(rawCardRows: string[]) {
     this.setRows(rawCardRows);
-    this.setColumns();
   }
 
   private setRows(rawCardRows: string[]) {
@@ -19,16 +15,10 @@ export class BingoCard {
       row
         .trim()
         .split(/\s+/)
-        .map((number): IBingoNumber => (
+        .map((number): BingoNumber => (
           { value: Number(number), marked: false }
         )),
     ));
-  }
-
-  private setColumns() {
-    for (let column = 0; column < this.rows.length; column++) {
-      this.columns.push(this.rows.map((row) => row[column]));
-    }
   }
 
   markNumber(value: number): void {
@@ -41,22 +31,24 @@ export class BingoCard {
     return this.hasBingoRow() || this.hasBingoColumn();
   }
 
-  private hasBingoRow(): boolean {
-    return this.rows.some((row) => BingoCard.checkBingo(row));
-  }
-
-  private hasBingoColumn(): boolean {
-    return this.columns.some((row) => BingoCard.checkBingo(row));
-  }
-
-  private static checkBingo(numbers: IBingoNumber[]) {
-    return numbers.every((number) => number.marked);
-  }
-
   getSumOfUnmarkedNumbers(): number {
     return this.rows
       .flat()
       .filter((bingoNumber) => !bingoNumber.marked)
       .reduce((prevSum, currentBingoNumber) => prevSum + currentBingoNumber.value, 0);
+  }
+
+  private hasBingoRow(): boolean {
+    return this.rows.some((row) => row.every((number) => number.marked));
+  }
+
+  private hasBingoColumn(): boolean {
+    const columns: BingoNumber[][] = [];
+
+    for (let column = 0; column < this.rows.length; column++) {
+      columns.push(this.rows.map((row) => row[column]));
+    }
+
+    return columns.some((column) => column.every((number) => number.marked));
   }
 }

@@ -25,6 +25,8 @@ module.exports = {
     'import/extensions': 0,
     'react/prop-types': 0,
     'linebreak-style': 0,
+    'no-restricted-syntax': 0,
+    'no-continue': 0,
     'import/prefer-default-export': 0,
     'max-len': [
       2,
