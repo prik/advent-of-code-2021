@@ -12,8 +12,8 @@ const createBitPositionColunms = (source: string[]): string[][] => {
 };
 
 const getMostCommonValueAtBitPosition = ((column: string[]): string => {
-  const zeroCount = column.filter((x: string) => x === '0').length;
-  const oneCount = column.filter((x: string) => x === '1').length;
+  const zeroCount = column.filter((bit: string) => bit === '0').length;
+  const oneCount = column.filter((bit: string) => bit === '1').length;
 
   return zeroCount > oneCount ? '0' : '1';
 });

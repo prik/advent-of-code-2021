@@ -19,16 +19,16 @@ const getMostCommonValueAtBitPosition = ((column: string[]) => {
 });
 
 const findRating = (collection: string[], occurenceAmount: 'mostOccurences' | 'leastOccurences') => {
-  let index = 0;
+  let column = 0;
   while (collection.length > 1) {
     const columns = createBitPositionColunms(collection);
-    const mostCommonValue = getMostCommonValueAtBitPosition(columns[index]);
+    const mostCommonValue = getMostCommonValueAtBitPosition(columns[column]);
     if (occurenceAmount === 'mostOccurences') {
-      collection = collection.filter((byteRow) => byteRow[index] === mostCommonValue);
+      collection = collection.filter((byteRow) => byteRow[column] === mostCommonValue);
     } else {
-      collection = collection.filter((byteRow) => byteRow[index] !== mostCommonValue);
+      collection = collection.filter((byteRow) => byteRow[column] !== mostCommonValue);
     }
-    index++;
+    column++;
   }
 
   return collection[0];
