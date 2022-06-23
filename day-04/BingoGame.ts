@@ -30,20 +30,20 @@ export class BingoGame {
     return this.winners[this.winners.length - 1];
   }
 
-  private createBingoCards() {
+  private createBingoCards(): void {
     for (let i = STARTING_ROW_OF_CARDS; i < this.subsystemOutput.length; i += (ROWS_IN_CARD + ROWS_BETWEEN_CARDS)) {
       const cardData = this.subsystemOutput.slice(i, i + ROWS_IN_CARD);
       this.cards.push(new BingoCard(cardData));
     }
   }
 
-  private setDrawingNumbers() {
+  private setDrawingNumbers(): void {
     this.numberSequence = this.subsystemOutput[0]
       .split(',')
       .map(Number);
   }
 
-  private drawNumber(numberDrawn: number) {
+  private drawNumber(numberDrawn: number): void {
     this.cards.forEach((card) => {
       const cardHasAlreadyWon = this.winners.find((winner) => winner.winnerCard === card);
       if (cardHasAlreadyWon) return;
@@ -59,7 +59,7 @@ export class BingoGame {
     });
   }
 
-  private play() {
+  private play(): void {
     this.numberSequence.forEach((numberDrawn) => this.drawNumber(numberDrawn));
   }
 }

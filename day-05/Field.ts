@@ -9,13 +9,13 @@ export class Field {
     this.lines = lines;
   }
 
-  drawLines() {
+  drawLines(): void {
     this.lines.forEach((line) => line.coordinates.forEach((coord) => {
       this.field[coord.y][coord.x]++;
     }));
   }
 
-  getHighOverlapPoints() {
+  getHighOverlapPoints(): void {
     return this.field
       .flat()
       .filter((overlapCount) => overlapCount > 1)

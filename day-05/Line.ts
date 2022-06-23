@@ -15,7 +15,7 @@ export class Line {
     this.setCoordinates();
   }
 
-  private setCoordinates() {
+  private setCoordinates(): void {
     if (this.isHorizontal()) {
       this.setHorizontalCoordinates();
     } else if (this.isVertical()) {
@@ -33,7 +33,7 @@ export class Line {
     return this.start.x === this.end.x;
   }
 
-  private setHorizontalCoordinates() {
+  private setHorizontalCoordinates(): void {
     const [min, max] = Line.getLowestAndHighestCoordinates(this.start.x, this.end.x);
 
     for (let x = min; x <= max; x++) {
@@ -41,7 +41,7 @@ export class Line {
     }
   }
 
-  private setVerticalCoordinates() {
+  private setVerticalCoordinates(): void {
     const [min, max] = Line.getLowestAndHighestCoordinates(this.start.y, this.end.y);
 
     for (let y = min; y <= max; y++) {
@@ -49,11 +49,11 @@ export class Line {
     }
   }
 
-  private setDiagonalCoordinates() {
+  private setDiagonalCoordinates(): void {
     //
   }
 
-  private static getLowestAndHighestCoordinates(start: number, end: number) {
+  private static getLowestAndHighestCoordinates(start: number, end: number): void {
     const lowestCoord = Math.min(start, end);
     const highestCoord = Math.max(start, end);
 

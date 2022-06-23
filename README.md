@@ -1,6 +1,6 @@
 # Advent of Code 2021
 
-This repository will contain my solutions to some of the puzzles this fun game has to provide.
+This repo contains my solutions to some of the puzzles this fun game has to provide.
 It is written in TypeScript, which is the first time for me working with it, so I got to learn lots of stuff along the way.
 
 ### Usage
