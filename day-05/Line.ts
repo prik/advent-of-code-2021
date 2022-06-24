@@ -50,11 +50,11 @@ export class Line {
   }
 
   private setDiagonalCoordinates(): void {
-    const [startCoords, endCoords] = Line.sortDiagonalCoordinates(this.start, this.end)
-    const isAscending = endCoords.y > startCoords.y;
-    let y = startCoords.y;
+    const [startCoord, endCoord] = Line.sortDiagonalCoordinates(this.start, this.end)
+    const isAscending = endCoord.y > startCoord.y;
+    let y = startCoord.y;
 
-    for (let x = startCoords.x; x <= endCoords.x; x++) {
+    for (let x = startCoord.x; x <= endCoord.x; x++) {
       this.coordinates.push({ x, y });
       isAscending ? y++: y--;
     }
