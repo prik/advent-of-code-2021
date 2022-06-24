@@ -1,9 +1,11 @@
-import { readFileSync } from 'fs';
+import { Dir, readFileSync } from 'fs';
 import path from 'path';
 
-const FORWARD = 'forward';
-const DOWN = 'down';
-const UP = 'up';
+enum Direction {
+  Forward = "forward",
+  Down = "down",
+  Up = "up",
+}
 
 const courseInstructions: string[][] = readFileSync(path.resolve(__dirname, 'input.txt'), 'utf-8')
   .split('\n')
@@ -17,13 +19,13 @@ courseInstructions.forEach((course) => {
   const units: number = Number(course[1]);
 
   switch (direction) {
-    case FORWARD:
+    case Direction.Forward:
       horizontalPosition += units;
       break;
-    case DOWN:
+    case Direction.Down:
       depth += units;
       break;
-    case UP:
+    case Direction.Up:
       depth -= units;
       break;
     default:
