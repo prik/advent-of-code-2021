@@ -1,4 +1,4 @@
-import { Dir, readFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import path from 'path';
 
 enum Direction {

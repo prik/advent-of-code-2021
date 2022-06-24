@@ -25,10 +25,10 @@ courseInstructions.forEach((instruction): void => {
       depth += (aim * units);
       break;
     case Direction.Down:
-        aim += units;
+      aim += units;
       break;
     case Direction.Up:
-        aim -= units;
+      aim -= units;
       break;
     default:
       break;
