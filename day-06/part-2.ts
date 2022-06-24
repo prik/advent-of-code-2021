@@ -14,9 +14,10 @@ const fishAgeCounters: number[] = new Array(DISTINCT_AGES).fill(0);
 initialFishAges.forEach((age): number => fishAgeCounters[age]++);
 
 const processDailyAgeing = (): void => {
-  const newLifeAndRevivalCount: number = fishAgeCounters.shift() || 0;
-  fishAgeCounters[NEW_LIFE_AGE] = newLifeAndRevivalCount;
-  fishAgeCounters[REVIVED_LIFE_AGE] += newLifeAndRevivalCount;
+  const newLifeAndRevivalAmount: number = fishAgeCounters.shift() || 0;
+  
+  fishAgeCounters[NEW_LIFE_AGE] = newLifeAndRevivalAmount;
+  fishAgeCounters[REVIVED_LIFE_AGE] += newLifeAndRevivalAmount;
 };
 
 const simulateFishGrowth = (): void => {
