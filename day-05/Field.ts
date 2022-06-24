@@ -15,7 +15,7 @@ export class Field {
     }));
   }
 
-  getHighOverlapPoints(): void {
+  getHighOverlapPoints(): number {
     return this.field
       .flat()
       .filter((overlapCount) => overlapCount > 1)

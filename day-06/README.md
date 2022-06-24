@@ -64,3 +64,4 @@ How many lanternfish would there be after 256 days?
 
 Your puzzle answer was `1749945484935`.
 
+Both parts of this puzzle are complete! They provide two gold stars: **

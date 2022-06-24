@@ -77,3 +77,5 @@ In the above example, the second board is the last to win, which happens after 1
 Figure out which board will win last. Once it wins, what would its final score be?
 
 Your puzzle answer was `17388`.
+
+Both parts of this puzzle are complete! They provide two gold stars: **

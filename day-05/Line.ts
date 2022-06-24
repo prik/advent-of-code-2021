@@ -34,29 +34,40 @@ export class Line {
   }
 
   private setHorizontalCoordinates(): void {
-    const [min, max] = Line.getLowestAndHighestCoordinates(this.start.x, this.end.x);
+    const [minX, maxX] = Line.getLowestAndHighestCoordinates(this.start.x, this.end.x);
 
-    for (let x = min; x <= max; x++) {
+    for (let x = minX; x <= maxX; x++) {
       this.coordinates.push({ x, y: this.start.y });
     }
   }
 
   private setVerticalCoordinates(): void {
-    const [min, max] = Line.getLowestAndHighestCoordinates(this.start.y, this.end.y);
+    const [minY, maxY] = Line.getLowestAndHighestCoordinates(this.start.y, this.end.y);
 
-    for (let y = min; y <= max; y++) {
+    for (let y = minY; y <= maxY; y++) {
       this.coordinates.push({ x: this.start.x, y });
     }
   }
 
   private setDiagonalCoordinates(): void {
-    //
+    const [startCoords, endCoords] = Line.sortDiagonalCoordinates(this.start, this.end)
+    const isAscending = endCoords.y > startCoords.y;
+    let y = startCoords.y;
+
+    for (let x = startCoords.x; x <= endCoords.x; x++) {
+      this.coordinates.push({ x, y });
+      isAscending ? y++: y--;
+    }
   }
 
-  private static getLowestAndHighestCoordinates(start: number, end: number): void {
+  private static getLowestAndHighestCoordinates(start: number, end: number): number[] {
     const lowestCoord = Math.min(start, end);
     const highestCoord = Math.max(start, end);
 
     return [lowestCoord, highestCoord];
+  }
+  
+  private static sortDiagonalCoordinates(start: Coordinate, end: Coordinate): Coordinate[] {
+    return [start, end].sort((a, b) => a.x - b.x)
   }
 }
