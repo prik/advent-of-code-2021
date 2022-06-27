@@ -27,6 +27,7 @@ module.exports = {
     'linebreak-style': 0,
     'no-restricted-syntax': 0,
     'no-loop-func': 0,
+    'no-return-assign': 0,
     'no-continue': 0,
     'import/prefer-default-export': 0,
     'max-len': [
